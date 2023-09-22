@@ -24,7 +24,21 @@ namespace QueuingProgram
 
         public void ClientForm_Load(object sender, EventArgs e)
         {
-
+            Timer timer = new Timer();
+            timer.Interval = (1 * 1000);
+            timer.Tick += new EventHandler(btnRefresh);
+            timer.Start();
+        }
+        private void btnRefresh(object sender, EventArgs e)
+        {
+            if (CashierClass.CashierQueue.Count > 0)
+            {
+                lblNowServing.Text = CashierClass.CashierQueue.Peek();
+            }
+            else
+            {
+                lblNowServing.Text = "No Customer.";
+            }
         }
     }
 }
